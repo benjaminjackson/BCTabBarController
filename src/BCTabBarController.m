@@ -77,6 +77,9 @@
 - (void)setViewControllers:(NSArray *)array {
 	[viewControllers release];
 	viewControllers = [array retain];
+	for (UIViewController *vc in viewControllers) {
+        [vc setValue:self forKey:@"_parentViewController"];
+    }
 	[self loadTabs];
 }
 
