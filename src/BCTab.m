@@ -15,8 +15,9 @@
 		self.rightBorder = [UIImage imageNamed:@"BCTabBarController.bundle/tab-right-border.png"];
 		self.backgroundColor = [UIColor clearColor];
 		
-		NSString *selectedName = [NSString stringWithFormat:@"%@-selected.%@",
+		NSString *selectedName = [NSString stringWithFormat:@"%@%@.%@",
 								   [imageName stringByDeletingPathExtension],
+								   SELECTED_IMAGE_POSTFIX,
 								   [imageName pathExtension]];
 		
 		[self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
