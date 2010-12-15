@@ -6,7 +6,7 @@
 @end
 
 @implementation BCTab
-@synthesize rightBorder, background;
+@synthesize rightBorder, background, useChrome;
 
 - (id)initWithIconImageName:(NSString *)imageName {
 	if (self = [super init]) {
@@ -40,12 +40,14 @@
 	if (self.selected) {
 		[background drawAtPoint:CGPointMake(0, 2)];
 		[rightBorder drawAtPoint:CGPointMake(self.bounds.size.width - rightBorder.size.width, 2)];
-		CGContextRef c = UIGraphicsGetCurrentContext();
-		[RGBCOLOR(24, 24, 24) set]; 
-		CGContextFillRect(c, CGRectMake(0, self.bounds.size.height / 2, self.bounds.size.width, self.bounds.size.height / 2));
-		[RGBCOLOR(14, 14, 14) set];		
-		CGContextFillRect(c, CGRectMake(0, self.bounds.size.height / 2, 0.5, self.bounds.size.height / 2));
-		CGContextFillRect(c, CGRectMake(self.bounds.size.width - 0.5, self.bounds.size.height / 2, 0.5, self.bounds.size.height / 2));
+		if (self.useChrome) {
+    		CGContextRef c = UIGraphicsGetCurrentContext();
+    		[RGBCOLOR(24, 24, 24) set]; 
+    		CGContextFillRect(c, CGRectMake(0, self.bounds.size.height / 2, self.bounds.size.width, self.bounds.size.height / 2));
+    		[RGBCOLOR(14, 14, 14) set];		
+    		CGContextFillRect(c, CGRectMake(0, self.bounds.size.height / 2, 0.5, self.bounds.size.height / 2));
+    		CGContextFillRect(c, CGRectMake(self.bounds.size.width - 0.5, self.bounds.size.height / 2, 0.5, self.bounds.size.height / 2));
+		}
 	}
 }
 

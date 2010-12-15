@@ -14,7 +14,7 @@
 
 
 @implementation BCTabBarController
-@synthesize viewControllers, tabBar, selectedTab, selectedViewController, tabBarView;
+@synthesize viewControllers, tabBar, selectedTab, selectedViewController, tabBarView, useChrome;
 
 - (id)init {
 	if (self = [super init]) {
@@ -31,6 +31,7 @@
 															  self.view.bounds.size.width, 44)]
 				   autorelease];
 	self.tabBar.delegate = self;
+    self.tabBar.useChrome = self.useChrome;
 	self.view.backgroundColor = [UIColor clearColor];
 	self.tabBarView.tabBar = self.tabBar;
 	[self loadTabs];
@@ -64,7 +65,10 @@
 - (void)loadTabs {
 	NSMutableArray *tabs = [NSMutableArray arrayWithCapacity:self.viewControllers.count];
 	for (UIViewController *vc in self.viewControllers) {
-		[tabs addObject:[[[BCTab alloc] initWithIconImageName:[vc iconImageName]] autorelease]];
+        BCTab *tab = [[BCTab alloc] initWithIconImageName:[vc iconImageName]];
+        tab.useChrome = self.useChrome;
+		[tabs addObject:tab];
+        [tab release];
 	}
 	self.tabBar.tabs = tabs;
 }

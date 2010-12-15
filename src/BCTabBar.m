@@ -9,7 +9,7 @@
 @end
 
 @implementation BCTabBar
-@synthesize tabs, selectedTab, backgroundImage, arrow, delegate;
+@synthesize tabs, selectedTab, backgroundImage, arrow, delegate, useChrome;
 
 - (id)initWithFrame:(CGRect)aFrame {
 
@@ -33,8 +33,10 @@
 	[super drawRect:rect];
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	[self.backgroundImage drawAtPoint:CGPointMake(0, 0)];
-	[[UIColor blackColor] set];
-	CGContextFillRect(context, CGRectMake(0, self.bounds.size.height / 2, self.bounds.size.width, self.bounds.size.height / 2));
+	if (self.useChrome) {
+    	[[UIColor blackColor] set];
+    	CGContextFillRect(context, CGRectMake(0, self.bounds.size.height / 2, self.bounds.size.width, self.bounds.size.height / 2));
+	}
 }
 
 - (void)setTabs:(NSArray *)array {
